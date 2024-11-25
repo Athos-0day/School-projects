@@ -4,11 +4,6 @@ with Ada.Integer_Text_IO;
 use Ada.Integer_Text_IO;
 with Alea;
 
---------------------------------------------------------------------------------
---  Auteur   : MORAIN Arthur
---  Objectif : Affronter la machine au jeu de Nim à 13 allumettes avec un niveau demandé par l'utilisateur
---------------------------------------------------------------------------------
-
 procedure Allumettes is
 	--Affronter la machine au jeu de Nim à 13 allumettes avec un niveau demandé par l'utilisateur
  	package Alea_1_3 is
