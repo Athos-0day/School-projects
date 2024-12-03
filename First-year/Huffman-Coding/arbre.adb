@@ -1,6 +1,6 @@
 with Ada.Text_IO;            use Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
-with 
+with ABR_Exceptions;         use ABR_Exceptions;
 
 package body ABR is
 
