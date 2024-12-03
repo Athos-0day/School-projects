@@ -19,7 +19,8 @@ package ABR is
 
 
 
-    --Initialiser un Arbre. L'Arbre est vide
+    --Initialiser un Arbre
+    --Arbre=null 
     procedure Initialiser(Arbre : out T_ABR) with
             Post => Est_Vide (Arbre);
 
@@ -62,7 +63,7 @@ package ABR is
             Post => Taille (Abr1) = (Taille (Abr2) + Taille (Abr1)'Old + 1) ;
 
     --Créer un arbre qui est une seule feuille 
-    --On donnera une valeur et un identifiant
+    --L'arbre ne contient qu'un seule noeud 
     procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : in T_Valeur, Identifiant ; in T_ID) ;
 
     --Parcourt qui stocke les valeurs sur les branches dans une LCA jusqu'à une feuille
