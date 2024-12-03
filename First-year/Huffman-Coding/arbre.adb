@@ -107,8 +107,21 @@ package body ABR is
         --Cas où l'Arbre est vide 
         if Arbre=null then 
             null ;
-        elsif Arbre.all.Gauche/=null then 
+        end if ;
+
+        --Parcourt à gauche
+        if Arbre.all.Gauche/=null then 
             --On ajoute un 0 à la LCA associé à la valeur de l'id (mais ne sera pas utile) 
-            Enregistrer(Parcourt,
+            Enregistrer(Parcourt,Arbre.all.Identifiant,0) ;
+            Parcourt_Infixe(Arbre.all.Gauche, Liste);
+        end if;
+
+        --Parcourt à droite 
+        if Arbre.all.Droite/=null then 
+            --On ajoute un 1 à la LCA associé à la valeur de l'id (mais ne sera pas utile)
+            Enregistrer(Parcourt,Arbre.all.Identifiant,1) ;
+        end if;
+    end Parcourt_Infixe ;
+            
 
 
