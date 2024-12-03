@@ -10,9 +10,6 @@ package ABR is
 
     type T_ABR is limited private ;
 
-    Arbre_Vide_Exception : Exception ;
-    Fils_Vide_Exception : Exception ;
-
     package LCA_Entier is
             new LCA(T_Cle    => ,
                     T_Valeur => )
