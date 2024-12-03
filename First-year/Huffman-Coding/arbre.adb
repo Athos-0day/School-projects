@@ -20,11 +20,11 @@ package body ABR is
     procedure Detruire(Arbre : in out T_ABR) is
     begin
         if Arbre/=null then
-            Detruire(Arbre.all.Gauche) ; --on supprime le fils gauche
-            Detruire(Arbre.all.Droit) ; --on supprime le fils droit
-            Free(Arbre) ;
+            Detruire(Arbre.all.Gauche) ; --Supprime le fils gauche
+            Detruire(Arbre.all.Droit) ; --Supprime le fils droit
+            Free(Arbre) ; --Libère la mémoire
         else
-            null ;
+            null ; --Cas de base l'arbre est null
         end if ;
     end Detruire ;
 
