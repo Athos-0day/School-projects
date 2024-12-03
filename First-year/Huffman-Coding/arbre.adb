@@ -75,7 +75,7 @@ package body ABR is
     end L_Identifiant ;
 
 
-    function Taille(Arbre : in T_ABR) is
+    function Taille(Arbre : in T_ABR) return Integer is
     begin
         if Arbre=null then
             return  0 ;
