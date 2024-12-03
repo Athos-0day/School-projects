@@ -12,7 +12,7 @@ package body ABR is
         Arbre := null ;
     end Initialiser ;
 
-    procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : T_Valeur, Identifiant : T_ID) is 
+    procedure Creer_Feuille(Feuille : in out T_ABR; Valeur : T_Valeur; Identifiant : T_ID) is 
     begin 
         Feuille := new T_Noeud'(Identifiant,Valeur,null,null) ;
     end Creer_Feuille ;
@@ -89,7 +89,7 @@ package body ABR is
         end if ;
     end Taille ;
 
-    procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) is
+    procedure Fusionner_Arbres(Abr1 : in out T_ABR; Abr2 : in T_ABR) is
         if Abr2=null then
             null ; --L'arbre 1 n'est pas modifié
         elsif Abr1=null then
@@ -101,5 +101,14 @@ package body ABR is
             Detruire(Abr2);
         end if ;
     end Fusionner_Arbres ;
+
+    procedure Parcourt_Infixe(Arbre : in T_ABR; Parcourt : in out T_LCA) is 
+    begin 
+        --Cas où l'Arbre est vide 
+        if Arbre=null then 
+            null ;
+        elsif Arbre.all.Gauche/=null then 
+            --On ajoute un 0 à la LCA associé à la valeur de l'id (mais ne sera pas utile) 
+            Enregistrer(Parcourt,
 
 
