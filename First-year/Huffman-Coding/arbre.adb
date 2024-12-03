@@ -12,6 +12,11 @@ package body ABR is
         Arbre := null ;
     end Initialiser ;
 
+    procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : T_Valeur, Identifiant : T_ID) is 
+    begin 
+        Feuille := new T_Noeud'(Identifiant,Valeur,null,null) ;
+    end Creer_Feuille ;
+
     procedure Detruire(Arbre : in out T_ABR) is
     begin
         if Arbre/=null then
