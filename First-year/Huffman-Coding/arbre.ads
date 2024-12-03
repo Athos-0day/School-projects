@@ -1,6 +1,6 @@
---Définition de la structure de données d'un arbre binaire
---type (ABR)
-with LCA ; -- Pour stocker le parcourt infixe de l'arbre
+--Définition de la structure de données d'un arbre binaire (ABR)
+
+with LCA ;
 
 generic
     type T_ID is private ;
@@ -8,23 +8,33 @@ generic
 
 package ABR is
 
+    --On empêche les copies de l'Arbre pour l'utilisateur
+    --Cela ne pose pas de problème ici
     type T_ABR is limited private ;
 
+    
     package LCA_Entier is
             new LCA(T_Cle    => ,
                     T_Valeur => )
 
 
-
     --Initialiser un Arbre
-    --Arbre=null 
+    --L'Arbre est initialisé à la valeur null
     procedure Initialiser(Arbre : out T_ABR) with
             Post => Est_Vide (Arbre);
 
-    --Détruire un Arbre, l'Arbre n'existe plus en mémoire
+    --Créer un arbre qui est une seule feuille 
+    --L'arbre ne contient qu'un seule noeud 
+    procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : in T_Valeur, Identifiant ; in T_ID) ;
+            Post => Taille(Feuille) = 1 ;
+
+    --Détruire un Arbre
+    --Libère l'espace mémoire alloué à l'Arbre
     procedure Detruire(Arbre : in out T_ABR);
 
-    --Obtenir la taille d'un arbre i.e son nombre de noeuds
+    --Obtenir la taille d'un arbre 
+    --Le taille de l'arbre est son nombre de noeuds
+    --La fonction renverra 0 si l'Arbre est vide
     function Taille(Arbre : in T_ABR) return Integer with
             Post => Taille'Result >= 0
             and (Taille'Result = 0) = Est_Vide (Arbre);
@@ -33,15 +43,17 @@ package ABR is
     function Est_Vide(Arbre : in T_ABR) return Boolean ;
 
     --Vérifier si un arbre est une feuille
+    --Cela veut dire que le noeud n'a pas de fils
+    --Dans le cas où l'arbre est vide, on renvoie false
     function Est_Feuille(Arbre: in T_ABR) return Boolean ;
 
     --Récupérer le fils gauche d'un arbre
-    --On lève l'exception Fils_Vide_Exception lorsque le fils gauche est null
+    --On lève l'exception Fils_Gauche_Vide lorsque l'arbre ne possède pas de fils gauche
     function Fils_Gauche(Arbre : in T_ABR) return T_ABR with
             Pre => not Est_Vide(Arbre) ;
 
     --Récupérer le fils droit d'un arbre
-    --On lève l'exception Fils_Vide_Exception lorsque le fils gauche est null
+    --On lève l'exception Fils_Droit_Vide lorsque l'arbre ne possède pas de fils droit
     function Fils_Droit(Arbre : in T_ABR) return T_ABR with
             Pre => not Est_Vide(Arbre) ;
 
@@ -58,10 +70,6 @@ package ABR is
     --Le résultat sera stocké dans Abr1 et on libère la mémoire de Abr2
     procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) with
             Post => Taille (Abr1) = (Taille (Abr2) + Taille (Abr1)'Old + 1) ;
-
-    --Créer un arbre qui est une seule feuille 
-    --L'arbre ne contient qu'un seule noeud 
-    procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : in T_Valeur, Identifiant ; in T_ID) ;
 
     --Parcourt qui stocke les valeurs sur les branches dans une LCA jusqu'à une feuille
     --On effectue le parcourt en allant toujours à gauche puis à droite en cas de gils gauche absent
