@@ -31,7 +31,7 @@ package ABR is
 
     --Créer un arbre qui est une seule feuille 
     --L'arbre ne contient qu'un seule noeud 
-    procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : in T_Valeur, Identifiant ; in T_ID) ;
+    procedure Creer_Feuille(Feuille : in out T_ABR, Valeur : in T_Valeur; Identifiant ; in T_ID) ;
             Post => Taille(Feuille) = 1 ;
 
     --Détruire un Arbre
@@ -76,14 +76,14 @@ package ABR is
     --Le résultat sera stocké dans Abr1 et on libère la mémoire de Abr2
     --Dans le cas où Abr1 est vide on fera Abr1 :=Abr2
     --De même si Abr2 est vide on ne changera rien
-    procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) with
+    procedure Fusionner_Arbres(Abr1 : in out T_ABR; Abr2 : in T_ABR) with
             Post => Taille (Abr1) = (Taille (Abr2) + Taille (Abr1)'Old + 1) ;
 
     --Parcourt qui stocke les valeurs dans une chaine de caractère
     --Ce qui permettra de stocker l'arbre dans le fichier compresser 
     --On ne peut pas stocker directement le parcourt dans un type T_Octet 
     --En effet ce parcourt pourrait dépasser les 8 bits de l'octet dans une majorité des cas
-    function Parcourt_Infixe(Arbre : in T_ABR) return T_LCA;
+    procedure Parcourt_Infixe(Arbre : in T_ABR; Parcourt : in out T_LCA);
 
     --Construire l'arbre de Huffman à partir du parcourt infixe
     --Ce qui permettra de reconstruire l'arbre dans décompresser 
