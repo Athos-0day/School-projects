@@ -13,9 +13,15 @@ package ABR is
     type T_ABR is limited private ;
 
     
-    package LCA_Entier is
-            new LCA(T_Cle    => ,
-                    T_Valeur => )
+    package LCA_Entier_ID is
+            new LCA(T_Cle    => T_ID,
+                    T_Valeur => Integer)
+    use LCA_Entier_ID ;
+
+    package LCA_Entier_Valeur is 
+            new LCA(T_Cle    => Integer,
+                    T_Valeur => T_Valeur)
+    use LCA_Entier_Valeur
 
 
     --Initialiser un Arbre
@@ -71,10 +77,15 @@ package ABR is
     procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) with
             Post => Taille (Abr1) = (Taille (Abr2) + Taille (Abr1)'Old + 1) ;
 
-    --Parcourt qui stocke les valeurs sur les branches dans une LCA jusqu'à une feuille
-    --On effectue le parcourt en allant toujours à gauche puis à droite en cas de gils gauche absent
+    --Parcourt qui stocke les valeurs dans une chaine de caractère
+    --Ce qui permettra de stocker l'arbre dans le fichier compresser 
+    --On ne peut pas stocker directement le parcourt dans un type T_Octet 
+    --En effet ce parcourt pourrait dépasser les 8 bits de l'octet dans une majorité des cas
     function Parcourt_Infixe(Arbre : in T_ABR) return T_LCA;
 
+    --Construire l'arbre de Huffman à partir du parcourt infixe
+    --Ce qui permettra de reconstruire l'arbre dans décompresser 
+    
 
 private
 
