@@ -86,13 +86,14 @@ package body ABR is
 
     procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) is
         if Abr2=null then
-            null ; --l'arbre 1 n'est pas modifié
+            null ; --L'arbre 1 n'est pas modifié
         elsif Abr1=null then
-            Abr1 := Abr2 ; 
+            Abr1 := Abr2 ; --L'arbre 1 devient l'arbre 2
         else
-            Abr := new T_Noeud'(null,null,Abr1,Abr2) ;
-            Detruire(Abr1) ;
-            Abr1 := Abr ;
+            --Création du nouveau noeud
+            Abr1 := new T_Noeud'(null,null,Abr1,Abr2) ; --Fusion des deux arbres mais on ne peut pas mettre de valeur
+            --Libération de l'espace alloué à l'arbre 2
+            Detruire(Abr2);
         end if ;
     end Fusionner_Arbres ;
 
