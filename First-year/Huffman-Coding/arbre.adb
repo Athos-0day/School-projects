@@ -106,7 +106,7 @@ package body ABR is
     begin 
         --Cas où l'Arbre est vide 
         if Arbre=null then 
-            null ;
+            return; --Pour sortir de la procédure
         end if ;
 
         --Parcourt à gauche
