@@ -38,6 +38,7 @@ package body ABR is
     end Est_Feuille ;
 
     function Fils_Gauche(Arbre : in T_ABR) return T_ABR is
+    begin
         if Arbre.all.Gauche=null then
             raise Fils_Gauche_Vide ;
         else
@@ -47,6 +48,7 @@ package body ABR is
 
 
     function Fils_Droit(Arbre : in T_ABR) return T_ABR is
+    begin
         if Arbre.all.Droit=null then
             raise Fils_Droit_Vide ;
         else
