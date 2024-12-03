@@ -1,5 +1,6 @@
 with Ada.Text_IO;            use Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
+with 
 
 package body ABR is
 
@@ -29,12 +30,16 @@ package body ABR is
 
     function Est_Feuille(Arbre : in T_ABR) return Boolean is
     begin
-        return Arbre.all.Gauche=null and Arbre.all.Droit=null ;
+        if Arbre=null then
+            return false ;
+        else 
+            return Arbre.all.Gauche=null and Arbre.all.Droit=null ;
+        end if;
     end Est_Feuille ;
 
     function Fils_Gauche(Arbre : in T_ABR) return T_ABR is
         if Arbre.all.Gauche=null then
-            raise Arbre_Vide_Exception ;
+            raise Fils_Gauche_Vide ;
         else
             return Arbre.all.Gauche ;
         end if ;
@@ -43,7 +48,7 @@ package body ABR is
 
     function Fils_Droit(Arbre : in T_ABR) return T_ABR is
         if Arbre.all.Droit=null then
-            raise Arbre_Vide_Exception ;
+            raise Fils_Droit_Vide ;
         else
             return Arbre.all.Droit ;
         end if ;
@@ -77,16 +82,16 @@ package body ABR is
         end if ;
     end Taille ;
 
-    procedure Fusionner(Abr1 : in out T_ABR, Abr2 : in T_ABR) is
+    procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) is
         if Abr2=null then
             null ; --l'arbre 1 n'est pas modifié
         elsif Abr1=null then
-            Abr1 := Abr2 ;
+            Abr1 := Abr2 ; 
         else
-            Abr := new T_Noeud'(null,Abr1.all.Valeur+Abr2.all.Valeur,Abr1,Abr2) ;
+            Abr := new T_Noeud'(null,null,Abr1,Abr2) ;
             Detruire(Abr1) ;
             Abr1 := Abr ;
         end if ;
-    end Fusionner ;
+    end Fusionner_Arbres ;
 
 
