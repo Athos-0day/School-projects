@@ -15,12 +15,12 @@ package ABR is
     
     package LCA_Entier_ID is
             new LCA(T_Cle    => T_ID,
-                    T_Valeur => Integer)
+                    T_Valeur => Integer);
     use LCA_Entier_ID ;
 
     package LCA_Entier_Valeur is 
             new LCA(T_Cle    => Integer,
-                    T_Valeur => T_Valeur)
+                    T_Valeur => T_Valeur);
     use LCA_Entier_Valeur
 
 
@@ -74,6 +74,8 @@ package ABR is
     --Fusionner deux arbres à partir de leurs racines
     --Avec Abr1 (resp. Abr2) qui sera le fils gauche (resp. le fils droit)
     --Le résultat sera stocké dans Abr1 et on libère la mémoire de Abr2
+    --Dans le cas où Abr1 est vide on fera Abr1 :=Abr2
+    --De même si Abr2 est vide on ne changera rien
     procedure Fusionner_Arbres(Abr1 : in out T_ABR, Abr2 : in T_ABR) with
             Post => Taille (Abr1) = (Taille (Abr2) + Taille (Abr1)'Old + 1) ;
 
@@ -85,6 +87,8 @@ package ABR is
 
     --Construire l'arbre de Huffman à partir du parcourt infixe
     --Ce qui permettra de reconstruire l'arbre dans décompresser 
+    ------------------------------------------------------------
+    --sera traité plus tard
     
 
 private
